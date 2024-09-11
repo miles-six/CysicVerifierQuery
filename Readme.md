@@ -12,7 +12,7 @@
 
 1. 克隆此仓库：
    ```
-   git clone https://github.com/yourusername/cysic_rewards.git
+   git clone https://github.com/miles-six/CysicVerifierQuery.git
    cd cysic_rewards
    ```
 
