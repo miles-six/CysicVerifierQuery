@@ -36,6 +36,9 @@
    ```
 
 3. 脚本将输出每个地址的验证者信息和奖励，以及总奖励金额。
+4. 效果如下
+<img width="617" alt="image" src="https://github.com/user-attachments/assets/65f4e8f5-0d42-4253-bab1-678cb6c1abb5">
+
 
 ## 注意事项
 
