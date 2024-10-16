@@ -15,16 +15,7 @@
    git clone https://github.com/miles-six/CysicVerifierQuery.git
    cd cysic_rewards
    ```
-
-2. 运行安装脚本：
-   ```
-   chmod +x install_dependencies.sh
-   ./install_dependencies.sh
-   ```
-
-   这将安装所有必要的 Python 依赖。
-
-3. 确保您已安装 Chrome 浏览器和相应版本的 ChromeDriver。
+2. 确保您已安装 Chrome 浏览器和相应版本的 ChromeDriver。
 
 ## 使用方法
 
