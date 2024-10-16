@@ -13,7 +13,7 @@
 1. 克隆此仓库：
    ```
    git clone https://github.com/miles-six/CysicVerifierQuery.git
-   cd cysic_rewards
+   cd CysicVerifierQuery
    ```
 2. 确保您已安装 Chrome 浏览器和相应版本的 ChromeDriver。
 
