@@ -1,7 +1,5 @@
 import requests
 import json
-import requests
-from lxml import html
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -12,8 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # 填写自己的地址
 address_list = [
-   #"0x11111111",
-   #"0x22222222",
+  
 ]
 
 def get_rewards(url):
@@ -34,9 +31,6 @@ def get_rewards(url):
             EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
 
-        # 获取完整的 HTML 内容
-        html_content = driver.page_source
-
         # 使用 XPath 定位 rewards 信息
         xpath = '/html/body/div[1]/div/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[5]/span[2]'
         reward_element = WebDriverWait(driver, 10).until(
@@ -56,8 +50,9 @@ def get_rewards(url):
 # API基础URL
 base_url = "https://api-testnet.prover.xyz/api/v1/dashboard/queryByReward/{}"
 
-verifier_info = []
 rewards_sum = 0
+
+print("开始处理地址列表...")
 
 for address in address_list:
     # 构建完整的API URL
@@ -77,32 +72,23 @@ for address in address_list:
             
             # 提取验证者ID和名称
             id = verifier["ID"]
-         
-
             name = verifier["name"]
-           
             url = f"https://testnet.cysic.xyz/m/dashboard/verifier/{id}"
-           
             
             # 获取验证者rewards
             rewards = get_rewards(url)
-         
-
-            #计算rewards合
-            rewards_sum += float(rewards)
-            print(f"地址: {address}, 名称: {name}, 奖励: {rewards}")
-
-            verifier_info.append({
-                    "address": address,
-                    "name": name,
-                    "rewards": rewards
-                })
-                
             
+            if rewards is not None:
+                rewards_sum += float(rewards)
+                print(f"地址: {address}, 名称: {name}, 奖励: {rewards}")
+                
     except requests.RequestException as e:
         print(f"请求出错 {address}: {str(e)}")
+    except json.JSONDecodeError:
+        print(f"解析JSON响应失败,地址 {address} 可能不存在")
+    except KeyError:
+        print(f"API响应格式不正确,地址 {address} 可能不存在")
+    except Exception as e:
+        print(f"处理地址 {address} 时发生未知错误: {str(e)}")
 
-    
-print(f"rewards_sum: {rewards_sum}")
-
-
+print(f"\n总得分: {rewards_sum:.2f}")
